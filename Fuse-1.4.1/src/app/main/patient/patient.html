@@ -1,0 +1,32 @@
+<div id="profile" class="page-layout simple tabbed">
+
+  <!-- CONTENT -->
+  <div class="content" flex>
+
+    <md-tabs md-dynamic-height>
+        <md-tab>
+            <md-tab-label>
+                <span>General Info</span>
+            </md-tab-label>
+            <md-tab-body>
+                <md-content class="about-tab"
+                            ng-include="'app/main/patient/tabs/about/about.html'">
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+      <md-tab>
+        <md-tab-label>
+          <span>View All</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="about-tab"
+                      ng-include="'app/main/patient/tabs/view/view.html'">
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

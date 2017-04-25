@@ -1,0 +1,111 @@
+<div id="contacts" class="page-layout simple left-sidenav inner-sidenav">
+
+    <!-- HEADER -->
+    <div class="header md-accent-bg" layout="row" layout-align="space-between center">
+
+        <!-- APP TITLE -->
+        <div layout="row" layout-align="start center">
+
+
+            <div class="logo" layout="row" layout-align="start center">
+                <span class="logo-icon">
+                    <md-icon md-font-icon="icon-account-box" class="s24"></md-icon>
+                </span>
+                <span class="logo-text">Dr {{vm.doctorName.firstName}} {{vm.doctorName.lastName}}</span>
+            </div>
+        </div>
+        <!-- / APP TITLE -->
+
+
+
+    </div>
+    <!-- / HEADER -->
+
+
+
+    <!-- CONTENT -->
+    <div class="content" md-background-bg layout="row" layout-align="start start">
+
+
+
+        <!-- MAIN -->
+        <div class="main" ms-scroll>
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+                <!-- CONTACT LIST HEADER -->
+                <md-subheader class="md-no-sticky md-white-bg">
+
+                    <div layout="row" layout-align="space-between center">
+
+                        <div class="list-title" layout="row" layout-align="start center"
+                             ng-hide="editGroupForm.$visible">
+                            <span>Today's Appointments</span>
+
+                        </div>
+
+
+                        <div flex></div>
+
+
+
+                    </div>
+
+                </md-subheader>
+                <!-- / CONTACT LIST HEADER -->
+
+                <!-- CONTACT ITEM -->
+
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="contact in q  track by $index "
+                              ng-style="{'transform': 'translate3d(0px, '+$index * 100+'%, 0px)', 'z-index': filteredContacts.length - $index}"
+                              ng-class="{'selected': vm.isSelected(contact)}">
+
+
+                    <p class="text-truncate font-weight-600">{{$index+1}}</p>
+                    <img class="md-avatar" alt="{{contact.name}}"
+                         ng-src="assets/images/avatars/Barrera.jpg"/>
+
+                    <p class="text-truncate font-weight-600">{{contact.patientFirstName}} {{contact.patientLastName}}</p>
+
+
+                    <p class="email text-truncate hide show-gt-sm">
+                      {{contact.startTime}}
+                    </p>
+
+                    <p class="phone text-truncate hide show-gt-md">
+                      {{contact.mobile}}
+                    </p>
+
+                    <p class="job-title text-truncate hide show-gt-lg">
+                      {{contact.jobTitle}}
+                    </p>
+
+                    <p class="company text-truncate hide show-gt-lg">
+                      {{contact.company}}
+                    </p>
+
+
+
+                </md-list-item>
+                <!-- CONTACT ITEM -->
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item class="no-results md-white-bg" ng-show="filteredContacts.length === 0">
+                <p translate="CONTACTS.NO_RESULTS">No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- / MAIN -->
+
+    </div>
+    <!-- / CONTENT -->
+
+
+
+</div>

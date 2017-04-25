@@ -1,0 +1,135 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <!-- CONTENT -->
+  <div class="content" layout="column">
+    <form name="profileForm" class="md-inline-form" novalidate>
+      <div layout="row">
+
+    <!-- BASIC FORM -->
+    <div class="form-wrapper md-whiteframe-1dp" flex="100">
+        <div class="form-title">Education</div>
+        <div layout="column" layout-gt-sm="row" ng-repeat="education in vm.profileForm.educations">
+          <md-input-container flex>
+            <input type="text" name="collegeName" ng-model="education.collegeName"
+                   placeholder="CollegeName">
+          </md-input-container>
+          <md-input-container flex>
+            <input type="text" name="degree" ng-model="education.degree"
+                   placeholder="Degree">
+          </md-input-container>
+          <md-input-container flex>
+            <input type="text" name="degreeYear" ng-model="education.degreeYear"
+                   placeholder="Degree Year">
+          </md-input-container>
+          <md-button class="md-fab md-mini md-warn" aria-label="Eat cake">
+            <md-icon md-font-icon="icon-delete" ng-click="vm.RemoveEducation($index)" aria-label="Delete event"></md-icon>
+          </md-button>
+
+        </div>
+        <!-- ADD EVENT BUTTON -->
+        <div>
+        <md-button class="md-fab" ng-click="vm.AddEducation($event)"
+                   aria-label="Add event">
+          <md-icon md-font-icon="icon-plus"></md-icon>
+        </md-button>
+        </div>
+    </div>
+    <!-- / BASIC FORM -->
+
+    <!-- BASIC FORM DATA -->
+
+    <!-- / BASIC FORM DATA -->
+  </div>
+      <div class="mv-24"></div>
+      <!--Memberships-->
+      <div layout="row">
+        <!-- BASIC FORM -->
+        <div class="form-wrapper md-whiteframe-1dp" flex="100">
+          <div class="form-title">Memberships</div>
+          <div layout="column" layout-gt-sm="row" ng-repeat="membership in vm.profileForm.memberships">
+            <md-input-container flex>
+              <input type="text" name="mName" ng-model="membership.name"
+                     placeholder="Name">
+            </md-input-container>
+            <md-input-container flex>
+              <input type="text" name="degree" ng-model="membership.number"
+                     placeholder="Number">
+            </md-input-container>
+            <md-input-container flex>
+              <input type="text" name="degreeYear" ng-model="membership.expiryDate"
+                     placeholder="Expiry Date">
+            </md-input-container>
+            <md-button class="md-fab md-mini md-warn" aria-label="Eat cake">
+              <md-icon md-font-icon="icon-delete" ng-click="vm.RemoveMembership($index)" aria-label="Delete event"></md-icon>
+            </md-button>
+
+          </div>
+          <!-- ADD EVENT BUTTON -->
+          <div>
+            <md-button class="md-fab" ng-click="vm.AddMembership($event)"
+                       aria-label="Add event">
+              <md-icon md-font-icon="icon-plus"></md-icon>
+            </md-button>
+          </div>
+        </div>
+        <!-- / BASIC FORM -->
+
+        <!-- BASIC FORM DATA -->
+
+        <!-- / BASIC FORM DATA -->
+      </div>
+      <div class="mv-24"></div>
+      <!--Hospital Experiences-->
+      <div layout="row">
+        <!-- BASIC FORM -->
+        <div class="form-wrapper md-whiteframe-1dp" flex="100">
+          <div class="form-title">Hospital Experiences</div>
+          <div layout="column" layout-gt-sm="row" ng-repeat="hospitalExperience in vm.profileForm.hospitalExperiences">
+            <md-input-container flex>
+              <input type="text" name="name" ng-model="hospitalExperience.name"
+                     placeholder="Hospital Name">
+            </md-input-container>
+            <md-input-container flex>
+              <input type="text" name="designation" ng-model="hospitalExperience.designation"
+                     placeholder="Designation">
+            </md-input-container>
+            <md-input-container flex>
+              <md-select ng-model="hospitalExperience.empanneled" placeholder="Empanneled">
+                <md-option value="true">
+                  Yes
+                </md-option>
+                <md-option value="false">
+                  No
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-button class="md-fab md-mini md-warn" aria-label="Eat cake">
+              <md-icon md-font-icon="icon-delete" ng-click="vm.RemoveHospitalExperience($index)" aria-label="Delete event"></md-icon>
+            </md-button>
+          </div>
+          <!-- ADD EVENT BUTTON -->
+          <div>
+            <md-button class="md-fab" ng-click="vm.AddHospitalExperience($event)"
+                       aria-label="Add event">
+              <md-icon md-font-icon="icon-plus"></md-icon>
+            </md-button>
+          </div>
+        </div>
+        <!-- / BASIC FORM -->
+
+        <!-- BASIC FORM DATA -->
+
+        <!-- / BASIC FORM DATA -->
+      </div>
+      <div class="mv-24"></div>
+      <div layout="row">
+        <!-- BASIC FORM -->
+        <div class="form-wrapper md-whiteframe-1dp" flex="100">
+            <md-button type="button" class="md-raised md-accent" aria-label="Submit" ng-click = "vm.SubmitProfileForm()">
+              Submit
+            </md-button>
+          </div>
+        </div>
+    </form>
+  </div>
+</div>
+

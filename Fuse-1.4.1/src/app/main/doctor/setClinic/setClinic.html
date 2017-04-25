@@ -1,0 +1,39 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row" style="
+    padding-top: 45px;
+    padding-right: 45px;
+    padding-left: 45px;
+    padding-bottom: 0px;
+">
+            <!-- BASIC FORM -->
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                <form name="setClinicForm" class="md-inline-form" novalidate>
+                    <!--<div class="form-title"></div>-->
+                    <div layout="column" layout-gt-sm="row"  flex="70">
+                        <md-input-container flex="100">
+                            <label>I am at this clinic</label>
+                            <md-select ng-model="vm.setClinicForm.clinic">
+                                <md-option ng-repeat="clinic in vm.clinicsDropDown" value="{{clinic.value}}">
+                                  {{clinic.display}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex="30">
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                  ng-disabled="!vm.setClinicForm.clinic" ng-click = "vm.SaveCurrentClinic()"  flex>
+                            Save
+                        </md-button>
+                        </md-input-container>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

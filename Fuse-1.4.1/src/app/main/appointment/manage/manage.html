@@ -1,0 +1,92 @@
+<div id="simple-table" class="page-layout simple fullwidth doc-page element-doc-page">
+
+    <!-- CONTENT -->
+    <div class="content">
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                <tr>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">MX ID</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Name</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Date</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Time</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Type</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Status</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Action</span>
+                        </div>
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="appointment in ::vm.appointments">
+                    <td>MX{{appointment.patientDetails.mxId}}{{appointment.patientDetails.mxIdSuffix}}</td>
+                    <td>{{appointment.patientDetails.nameToUpper}}</td>
+                    <td>{{appointment.date}}</td>
+                    <td>{{appointment.time}}</td>
+                    <td>{{appointment.type}}</td>
+                    <td>{{appointment.status}}</td>
+                    <td>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-show="appointment.status==='Pending'"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'Approve')"
+                                > Approve </md-button>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'Cancel')"
+                                   ng-show="appointment.status==='Pending'"
+                                > Cancel </md-button>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'Seen')"
+                                   ng-show="appointment.status==='Approve'"
+                                >  Seen </md-button>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'NoShow')"
+                                   ng-show="appointment.status==='Approve'"
+                                > No-Show </md-button>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'Pending')"
+                                   ng-show="appointment.status==='Approve' || appointment.status==='Cancel'"
+                                > Undo </md-button>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.UpdateAppointmentStatus(appointment, 'Approve')"
+                                   ng-show="appointment.status==='Seen' || appointment.status==='NoShow'"
+                                > Undo </md-button>
+
+                    </td>
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
+

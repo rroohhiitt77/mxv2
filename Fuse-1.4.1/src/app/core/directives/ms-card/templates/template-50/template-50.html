@@ -1,0 +1,45 @@
+<div class="template-50">
+  <div class="media">
+    <img class="image" ng-src="{{card.media.image.src}}" alt="{{card.media.image.alt}}" ng-show="card.media.image">
+  </div>
+
+  <div class="content pv-24 ph-16">
+    <form name="profileForm" class="md-inline-form" novalidate>
+      <md-input-container flex="100">
+        <input type="file" name="firstName" ng-model="vm.profileForm.firstName"
+               placeholder="Firstname"
+               required>
+        <div ng-messages="profileForm.firstName.$error"
+             role="alert">
+          <div ng-message="required">
+            <span>Firstname field is required.</span>
+          </div>
+        </div>
+      </md-input-container>
+      </form>
+    <div id="file-uploader">
+
+      <md-button class="add-file-button md-fab md-warn"
+                 ng-click="vm.addFile()" aria-label="Add file">
+        <md-icon md-font-icon="icon-plus"></md-icon>
+      </md-button>
+      <div class="form-wrapper md-whiteframe-1dp" flex="100">
+        <md-button type="button" class="md-raised md-accent" aria-label="Submit" ng-click = "vm.SubmitProfileForm()">
+          Submit
+        </md-button>
+      </div>
+    </div>
+    </div>
+    <div class="title h1" ng-if="card.title">
+      {{card.title}}
+    </div>
+
+    <div class="subtitle secondary-text" ng-if="card.subtitle">
+      {{card.subtitle}}
+    </div>
+
+    <div class="text pt-16" ng-if="card.text">
+      {{card.text}}
+    </div>
+  </div>
+</div>

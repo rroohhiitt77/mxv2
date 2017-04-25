@@ -1,0 +1,101 @@
+/* checkbox - each time slot */
+.time-slot               {  }
+
+/*hide the checkbox itself - the label will be styled*/
+.time-slot input     {
+  display:none;
+}
+
+/* default styling for our labels */
+.time-slot label     {
+  padding:10px 20px;
+  color:#FFF;
+  cursor:pointer;
+  background:#EEE;
+  border-radius:5px;
+  transition:0.3s ease all;
+}
+
+/* if the label is checked */
+.time-slot input:checked ~ label {
+  background:#f2dede;
+  cursor:not-allowed;
+  animation:flashBooked 0.5s ease;
+}
+
+/* if the label is not checked */
+.time-slot input:not(:checked) ~ label {
+  background:#6AB074;
+  animation:flashAvailable 0.5s ease;
+}
+
+/* animation for the time slot to flash red */
+@keyframes flashBooked {
+  0%, 100%  { background:#f2dede; transform:scale(1); }
+  50%       { background:#F99090; transform:scale(1.5); }
+}
+
+/* animation for the time slot to flash green */
+@keyframes flashAvailable {
+  0%, 100%  { background:#6AB074; transform:scale(1); }
+  50%       { background:rgb(119, 218, 78); transform:scale(1.5); }
+}
+
+
+/* checkbox - each time slot */
+.time-slot1               {  }
+
+/*hide the checkbox itself - the label will be styled*/
+.time-slot1 input     {
+  display:none;
+}
+
+/* default styling for our labels */
+.time-slot1 label     {
+  padding:5px 35px;
+  color:#FFF;
+  cursor:pointer;
+  background:#EEE;
+  border-radius:30px;
+  transition:0.3s ease all;
+}
+
+
+
+/* if the label is checked */
+.time-slot1 input:checked ~ label {
+  background:#6AB074;
+  animation:flashAvailable2 0.5s ease;
+}
+
+/* if the label is not checked */
+.time-slot1 input:not(:checked) ~ label {
+  background:#6AB074;
+  animation:flashAvailable1 0.5s ease;
+}
+
+/* if the label is disabled */
+.time-slot1 input:disabled ~ label {
+  background:#f2dede;
+  cursor:not-allowed;
+  animation:flashBooked1 0.5s ease;
+}
+
+/* animation for the time slot to flash red */
+@keyframes flashAvailable2 {
+  0%, 100%  { background:#6AB074; transform:scale(1); }
+  50%       { background:rgb(119, 218, 78); transform:scale(1.5); }
+}
+
+/* animation for the time slot to flash green */
+@keyframes flashAvailable1 {
+  0%, 100%  { background:#6AB074; transform:scale(1); }
+  50%       { background:rgb(119, 218, 78); transform:scale(1.5); }
+}
+
+/* animation for the time slot to flash red */
+@keyframes flashBooked1 {
+  0%, 100%  { background:#f2dede; transform:scale(1); }
+  50%       { background:#F99090; transform:scale(1.5); }
+}
+

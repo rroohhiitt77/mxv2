@@ -1,0 +1,263 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <form name="caseForm" class="md-inline-form" novalidate>
+            <div layout="row">
+            <!-- BASIC FORM -->
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                    <div class="form-title">Patient Case</div>
+                    <div layout="column" layout-gt-sm="row">
+                        <md-autocomplete flex="45" required
+                                         md-input-name="patientAutocompleteField"
+                                         md-input-minlength="0"
+                                         md-input-maxlength="150"
+                                         md-no-cache="true"
+                                         md-selected-item="vm.selectedPatient"
+                                         md-search-text="vm.searchTextPatient"
+                                         md-items="item in vm.querySearchPatient(vm.searchTextPatient)"
+                                         md-item-text="item.display"
+                                         md-floating-label="Patient">
+                            <md-item-template>
+                                <span md-highlight-text="vm.searchTextPatient">{{item.display}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                <i>Not Found {{vm.searchTextPatient}}</i>
+                            </md-not-found>
+                            <div ng-messages="bookingForm.patientAutocompleteField.$error" ng-if="bookingForm.patientAutocompleteField.$touched">
+                                <div ng-message="required">You <b>must</b> select a patient.</div>
+                                <div ng-message="minlength">Your entry is not long enough.</div>
+                                <div ng-message="maxlength">Your entry is too long.</div>
+                            </div>
+                        </md-autocomplete>
+                        <md-input-container flex>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.GetLatestCasesForpatient()"  >
+                            Get Cases
+                        </md-button>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <label>  OR  </label>
+                        </md-input-container>
+                        <md-input-container flex>
+                          <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                     ng-click = "vm.ShowNewCase()"  >
+                              Create New Case
+                          </md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" layout-gt-sm="row" ng-if="vm.showCaseHistory">
+                        <md-input-container flex>
+                            <label>Case History</label>
+                            <md-select ng-model="vm.caseForm.caseDropDown">
+                                <md-option ng-repeat="case in vm.caseDropDown" value="{{case.value}}">
+                                  {{case.display}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                       ng-click = "vm.GetCaseDetails()"  >
+                               Get Case Details
+                            </md-button>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" layout-gt-sm="row" ng-if="vm.showNewCase">
+                        <md-input-container flex>
+                            <input flex="45" type="text" name="title" ng-model="vm.caseForm.title"
+                                   placeholder="Title ( unique identifier for the case )"
+                                   required>
+                            <div ng-messages="caseForm.title.$error"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Case Title is required.</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" layout-gt-sm="row" ng-if="vm.showNewCase">
+
+                        <md-input-container flex class="md-block">
+                            <label>Description</label>
+                            <textarea ng-model="vm.caseForm.description" md-maxlength="550" max-rows="10"></textarea>
+                        </md-input-container>
+                        <md-input-container flex>
+                            <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                       ng-click = "vm.CreateNewCase()">
+                                Create
+                            </md-button>
+                        </md-input-container>
+                    </div>
+            </div>
+            <!-- / BASIC FORM -->
+
+            <!-- BASIC FORM DATA -->
+
+            <!-- / BASIC FORM DATA -->
+        </div>
+            <div class="mv-24"></div>
+            <div layout="row" ng-if="vm.showCase">
+                <!-- BASIC FORM -->
+                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                    <div class="form-title">Patient Case</div>
+                    <div layout="row" flex>
+                        <md-input-container flex class="md-block">
+                            <label>Complaints</label>
+                            <textarea ng-model="vm.case.complaints" max-rows="5"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex>
+                        <md-input-container flex class="md-block">
+                            <label>Symptoms</label>
+                            <textarea ng-model="vm.case.symptoms" max-rows="5"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex>
+                        <md-input-container flex class="md-block">
+                            <label>Diagnosis</label>
+                            <textarea ng-model="vm.case.diagnosis" max-rows="5"></textarea>
+                        </md-input-container>
+                    </div>
+                    <div layout="row" flex>
+                        <md-input-container flex class="md-block">
+                            <label>Doctor Notes ( not visible to patient )</label>
+                            <textarea ng-model="vm.case.docNotes" max-rows="5"></textarea>
+                        </md-input-container>
+                    </div>
+                </div>
+                <!-- / BASIC FORM -->
+
+                <!-- BASIC FORM DATA -->
+
+                <!-- / BASIC FORM DATA -->
+            </div>
+            <div class="mv-24"></div>
+            <div layout="row" ng-if="vm.showCase">
+                <!-- BASIC FORM -->
+                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                    <div class="form-title">Prescription</div>
+                    <div layout="column" ng-repeat="p in vm.case.prescription">
+                        <div layout="column" layout-gt-sm="row" >
+                            <md-input-container flex>
+                                <input type="text" name="drugName" ng-model="p.drugName"
+                                       placeholder="Drug Name">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <input type="text" name="strength" ng-model="p.strength"
+                                       placeholder="Strength">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <input type="text" name="duration" ng-model="p.duration"
+                                       placeholder="Duration">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <md-checkbox ng-model="p.morning" aria-label="Morning" flex style="margin-top: 8px;">
+                                    M
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <md-checkbox ng-model="p.afternoon" aria-label="Afternoon" flex style="margin-top: 8px;">
+                                    A
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <md-checkbox ng-model="p.night" aria-label="Night" flex style="margin-top: 8px;">
+                                    N
+                                </md-checkbox>
+                            </md-input-container>
+
+                        </div>
+                        <div layout="column" layout-gt-sm="row" >
+                            <md-input-container flex class="md-block" flex>
+                                <label>Instructions</label>
+                                <textarea ng-model="p.instruction" md-maxlength="550" max-rows="5"></textarea>
+                            </md-input-container>
+                            <!--<md-input-container flex = "50">-->
+                            <!--<input type="text" name="instructions" ng-model="p.instruction"-->
+                            <!--placeholder="Instructions">-->
+                            <!--</md-input-container>-->
+                            <md-input-container flex>
+                                <md-checkbox ng-model="p.beforeFood" aria-label="Before Food" flex style="margin-top: 8px;">
+                                    Before Food
+                                </md-checkbox>
+                            </md-input-container>
+                            <md-input-container flex>
+                                <md-checkbox ng-model="p.afterFood" aria-label="After Food" flex style="margin-top: 8px;">
+                                    After Food
+                                </md-checkbox>
+                            </md-input-container>
+
+
+                            <md-button class="md-fab md-mini md-warn" aria-label="Eat cake">
+                                <md-icon md-font-icon="icon-delete" ng-click="vm.RemovePrescription($index)" aria-label="Delete event"></md-icon>
+                            </md-button>
+                        </div>
+
+                    </div>
+                    <div>
+                        <md-button class="md-fab" ng-click="vm.AddPrescription($event)"
+                                   aria-label="Add event">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <!-- / BASIC FORM -->
+
+                <!-- BASIC FORM DATA -->
+
+                <!-- / BASIC FORM DATA -->
+            </div>
+            <div class="mv-24"></div>
+            <div layout="row" ng-if="vm.showCase">
+                <!-- BASIC FORM -->
+                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                    <div class="form-title">Lab Tests</div>
+                    <div layout="column" ng-repeat="l in vm.case.labTests">
+                        <div layout="column" layout-gt-sm="row" >
+                            <md-input-container flex>
+                                <input type="text" name="testname" ng-model="l.testName"
+                                       placeholder="Test Name">
+                            </md-input-container>
+                            <md-input-container flex>
+                                <input type="text" name="lab" ng-model="l.prefferedLab"
+                                       placeholder="Preffered Lab">
+                            </md-input-container>
+                        </div>
+                        <div layout="column" layout-gt-sm="row" >
+                            <md-input-container flex class="md-block" flex>
+                                <label>Instructions</label>
+                                <textarea ng-model="l.instructions" md-maxlength="550" max-rows="5"></textarea>
+                            </md-input-container>
+                            <md-button class="md-fab md-mini md-warn" aria-label="Eat cake" >
+                                <md-icon md-font-icon="icon-delete" ng-click="vm.RemoveLabTest($index)" aria-label="Delete event"></md-icon>
+                            </md-button>
+                        </div>
+
+                    </div>
+                    <div>
+                        <md-button class="md-fab" ng-click="vm.AddLabTest($event)"
+                                   aria-label="Add event">
+                            <md-icon md-font-icon="icon-plus"></md-icon>
+                        </md-button>
+                    </div>
+                </div>
+                <!-- / BASIC FORM -->
+
+                <!-- BASIC FORM DATA -->
+
+                <!-- / BASIC FORM DATA -->
+            </div>
+            <div class="mv-24"></div>
+            <div layout="row" ng-if="vm.showCase">
+                <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                    <md-input-container flex>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.SaveCase()">
+                            Save Case
+                        </md-button>
+                    </md-input-container>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

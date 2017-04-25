@@ -1,0 +1,42 @@
+<div id="clinicEdit" class="page-layout simple tabbed">
+
+  <!-- HEADER -->
+  <!-- CONTENT -->
+  <div class="content" flex>
+
+    <md-tabs md-dynamic-height>
+
+      <md-tab>
+        <md-tab-label>
+          <span>Add</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="about-tab"
+                      ng-include="'app/main/clinic/tabs.edit/add/addUpdate.html'">
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>
+          <span>View All</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="about-tab"
+                      ng-include="'app/main/clinic/tabs.edit/view/view.html'">
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+      <md-tab>
+        <md-tab-label>
+          <span>Doctors</span>
+        </md-tab-label>
+        <md-tab-body>
+          <md-content class="about-tab"
+                      ng-include="'app/main/clinic/tabs.edit/doctors/doctors.html'">
+          </md-content>
+        </md-tab-body>
+      </md-tab>
+    </md-tabs>
+  </div>
+  <!-- / CONTENT -->
+</div>

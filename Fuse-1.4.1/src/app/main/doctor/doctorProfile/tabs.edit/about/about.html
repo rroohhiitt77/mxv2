@@ -1,0 +1,175 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <!-- CONTENT -->
+<div class="content" layout="column">
+<div layout="row">
+  <!-- BASIC FORM -->
+  <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+    <form name="profileForm" class="md-inline-form" novalidate>
+
+      <div class="form-title"></div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="firstName" ng-model="vm.profileForm.firstName"
+                 placeholder="Firstname"
+                 required>
+          <div ng-messages="profileForm.firstName.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Firstname field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <input type="text" name="middleName" ng-model="vm.profileForm.middleName"
+                 placeholder="MiddleName">
+        </md-input-container>
+
+        <md-input-container flex>
+          <input type="text" name="lastName" ng-model="vm.profileForm.lastName" placeholder="Lastname"
+                 required>
+          <div ng-messages="profileForm.lastName.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Lastname field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="address1" ng-model="vm.profileForm.address1"
+                 placeholder="Address1"
+                 required>
+          <div ng-messages="profileForm.address1.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Address1 field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <input type="text" name="address2" ng-model="vm.profileForm.address2"
+                 placeholder="Address2"
+                 required>
+          <div ng-messages="profileForm.address2.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Address2 field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-xs="row">
+        <md-input-container flex>
+          <label>City</label>
+          <input type="text" name="city" ng-model="vm.profileForm.city">
+        </md-input-container>
+        <div ng-messages="profileForm.city.$error"
+             role="alert">
+          <div ng-message="required">
+            <span>City field is required.</span>
+          </div>
+        </div>
+
+        <md-input-container flex>
+          <label>State</label>
+          <md-select ng-model="vm.profileForm.state">
+            <md-option ng-repeat="state in vm.states" value="{{state}}">
+              {{state}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+
+        <md-input-container flex>
+          <label>Postal Code</label>
+          <input name="pincode" ng-model="vm.profileForm.pincode" placeholder="123456"
+                 required ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
+          <div ng-messages="profileForm.pincode.$error" role="alert" multiple>
+            <div ng-message="required"><span>You must supply a postal code.</span></div>
+            <div ng-message="pattern"><span>That doesn't look like a valid postal code.</span></div>
+            <div ng-message="md-maxlength">
+              <span>Pincode can't be longer than 6 characters.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="email" ng-model="vm.profileForm.email"
+                 placeholder="Email" ng-pattern="/^.+@.+\..+$/"
+                 required>
+          <div ng-messages="profileForm.email.$error"
+               role="alert" >
+            <div ng-message="required">
+              <span>Email field is required.</span>
+            </div>
+            <div ng-message="pattern"><span>That doesn't look like a valid email.</span></div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <input type="text" name="website" ng-model="vm.profileForm.website"
+                 placeholder="Website">
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="phoneNumber" ng-model="vm.profileForm.phoneNumber"
+                 placeholder="Phone Number ( Login id. to change please contact support@medixprt.com )" readonly>
+        </md-input-container>
+      </div>
+
+      <md-chips ng-model="vm.profileForm.phone1" name="phone1" placeholder="Phone Numbers" >
+       <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+      <md-chips ng-model="vm.profileForm.services" name="services" placeholder="Services" >
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+      <md-chips ng-model="vm.profileForm.specializations" name="specializations" placeholder="Specializations" >
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+      <md-chips ng-model="vm.profileForm.registrations" name="registrations" placeholder="Registrations" >
+        <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+
+      <md-input-container class="md-block">
+        <label>Profile Description</label>
+        <textarea ng-model="vm.profileForm.profileDescription" md-maxlength="350" max-rows="10"></textarea>
+      </md-input-container>
+
+
+
+      <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                 ng-disabled="profileForm.$invalid || profileForm.$pristine" ng-click = "vm.SubmitProfileForm()"  >
+        Submit
+      </md-button>
+    </form>
+
+  </div>
+  <!-- / BASIC FORM -->
+
+  <!-- BASIC FORM DATA -->
+
+  <!-- / BASIC FORM DATA -->
+</div>
+</div>
+  </div>
+

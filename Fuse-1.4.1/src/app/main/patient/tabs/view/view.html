@@ -1,0 +1,84 @@
+<div id="simple-table" class="page-layout simple fullwidth doc-page element-doc-page">
+
+  <!-- CONTENT -->
+  <div class="content">
+      <div class="white-bg md-whiteframe-4dp">
+          <md-button type="button" class="md-raised md-accent" aria-label="Get All"
+                     ng-click = "vm.GetAllPatients()"  >
+              Get Patients
+          </md-button>
+
+      </div>
+      <div class="mv-24"></div>
+    <div class="white-bg md-whiteframe-4dp">
+
+      <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+        <thead>
+        <tr>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">MX ID</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Name</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">City</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+              <div class="table-header">
+                  <span class="column-title">Login Phone</span>
+              </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Phone</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Email</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Address1</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Address2</span>
+            </div>
+          </th>
+          <th class="secondary-text">
+            <div class="table-header">
+              <span class="column-title">Pincode</span>
+            </div>
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="patient in ::vm.patients">
+          <td>MX{{patient.mxId}}{{patient.mxIdSuffix}}</td>
+          <td>{{patient.firstName}} {{patient.middleName}} {{patient.lastName}}</td>
+          <td>{{patient.city}}</td>
+          <td>{{patient.phoneNumber}}</td>
+          <td>{{patient.phone1}}</td>
+          <td>{{patient.email}}</td>
+          <td>{{patient.address1}}</td>
+          <td>{{patient.address2}}</td>
+          <td>{{patient.pincode}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+  <!-- / CONTENT -->
+
+</div>

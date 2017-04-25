@@ -1,0 +1,205 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+    <!-- CONTENT -->
+    <div class="content" layout="column">
+        <div layout="row">
+            <!-- BASIC FORM -->
+            <div class="form-wrapper md-whiteframe-1dp" flex="100">
+                <form name="bookingForm" class="md-inline-form" novalidate>
+                    <!--<div class="form-title"></div>-->
+                    <div layout="column" layout-gt-sm="row">
+                        <md-input-container flex>
+                            <label>Clinic</label>
+                            <md-select ng-model="vm.bookingForm.clinic">
+                                <md-option ng-repeat="clinic in vm.clinicsDropDown" value="{{clinic.value}}">
+                                  {{clinic.display}}
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                        <md-autocomplete flex required
+                                         md-input-name="patientAutocompleteField"
+                                         md-input-minlength="0"
+                                         md-input-maxlength="150"
+                                         md-no-cache="true"
+                                         md-selected-item="vm.selectedPatient"
+                                         md-search-text="vm.searchTextPatient"
+                                         md-items="item in vm.querySearchPatient(vm.searchTextPatient)"
+                                         md-item-text="item.display"
+                                         md-floating-label="Patient">
+                            <md-item-template>
+                                <span md-highlight-text="vm.searchTextPatient">{{item.display}}</span>
+                            </md-item-template>
+                            <md-not-found>
+                                <i>Not Found {{vm.searchTextPatient}}</i>
+                            </md-not-found>
+                            <div ng-messages="bookingForm.patientAutocompleteField.$error" ng-if="bookingForm.patientAutocompleteField.$touched">
+                                <div ng-message="required">You <b>must</b> select a patient.</div>
+                                <div ng-message="minlength">Your entry is not long enough.</div>
+                                <div ng-message="maxlength">Your entry is too long.</div>
+                            </div>
+                        </md-autocomplete>
+                        <md-input-container flex>
+                            <label>Booking Type</label>
+                            <md-select ng-model="vm.bookingForm.bookingType">
+                                <md-option value="Appointment" selected>
+                                  Appointment
+                                </md-option>
+                            </md-select>
+                        </md-input-container>
+                    </div>
+                    <div layout="column" layout-gt-sm="row">
+                        <md-input-container>
+                            <label>Booking Date</label>
+                            <input mdc-datetime-picker name="bookingDate"
+                                   date="true"
+                                   time="false"
+                                   type="text"
+                                   id="bookingDate"
+                                   short-time="true"
+                                   placeholder="Booking Date"
+                                   min-date="vm.minDate"
+                                   max-date="vm.maxDate"
+                                   format="DD-MMM-YYYY"
+                                   ng-model="vm.bookingDate">
+                            <div ng-messages="bookingForm.bookingDate.$error"
+                                 role="alert">
+                                <div ng-message="required">
+                                    <span>Booking date is required.</span>
+                                </div>
+                            </div>
+                        </md-input-container>
+                        <md-input-container>
+                        <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                                   ng-click = "vm.SubmitBookingForm()"  >
+                            Submit
+                        </md-button>
+                        </md-input-container>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div layout="column" layout-gt-sm="row">
+            <md-input-container>
+                <h2>{{vm.todayStr[0]}}</h2>
+
+                <div class="time-slot1" ng-repeat="slot in timeToday[0]">
+                    <md-button type="button" id="Today0 - {{ $index }}" class="md-raised md-accent" aria-label="Submit"
+                               ng-click = "vm.AppointmentClickedToday(slot,0)"
+                               ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')">
+                      {{slot.startTime}}
+                        <span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>
+                        <span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>
+                        <span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>
+                        <span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>
+                    </md-button>
+                    </div>
+                </md-input-container>
+            <md-input-container>
+                <h2>{{vm.todayStr[1]}}</h2>
+            <div class="time-slot1" ng-repeat="slot in timeToday[1]">
+                <md-button type="button" id="Today1 - {{ $index }}" class="md-raised md-accent" aria-label="Submit"
+                           ng-click = "vm.AppointmentClickedToday(slot,1)"
+                           ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')">
+                  {{slot.startTime}}
+                    <span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>
+                </md-button>
+            </div>
+            </md-input-container>
+            <md-input-container>
+                <h2>{{vm.todayStr[2]}}</h2>
+            <div class="time-slot1" ng-repeat="slot in timeToday[2]">
+                <md-button type="button" id="Today2 - {{ $index }}" class="md-raised md-accent" aria-label="Submit"
+                           ng-click = "vm.AppointmentClickedToday(slot,2)"
+                           ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')">
+                  {{slot.startTime}}
+                    <span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>
+                    <span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>
+                </md-button>
+            </div>
+            </md-input-container>
+          </div>
+            <!--<div layout="row">-->
+            <!--<div class="form-wrapper md-whiteframe-1dp" flex="100">-->
+            <!--<div class="col-md-12 text-center">-->
+
+                <!--<h2>{{vm.todayStr[0]}}</h2>-->
+
+                <!--<div class="time-slot1" ng-repeat="slot in timeToday[0]">-->
+                    <!--<md-button type="button" id="Today0 - {{ $index }}" class="md-raised md-accent" aria-label="Submit"-->
+                               <!--ng-click = "vm.AppointmentClickedToday(slot,0)"-->
+                               <!--ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')">-->
+                      <!--{{slot.startTime}}-->
+                        <!--<span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>-->
+                        <!--<span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>-->
+                        <!--<span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>-->
+                        <!--<span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>-->
+                    <!--</md-button>-->
+                    <!--&lt;!&ndash;<input type="checkbox" id="Today0 - {{ $index }}" ng-model="vm.book"&ndash;&gt;-->
+                           <!--&lt;!&ndash;ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')"&ndash;&gt;-->
+                           <!--&lt;!&ndash;ng-change="vm.AppointmentClickedToday(slot,0)">&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<label for="Today0 - {{ $index }}">{{slot.startTime}}<br>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</label>&ndash;&gt;-->
+
+                <!--</div>-->
+            <!--</div>-->
+                <!--<div class="col-md-12 text-center">-->
+
+                    <!--<h2>{{vm.todayStr[1]}}</h2>-->
+
+
+                    <!--<div class="time-slot1" ng-repeat="slot in timeToday[1]">-->
+
+                        <!--<input type="checkbox" id="Today1 - {{ $index }}" ng-model="vm.book"-->
+                               <!--ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')"-->
+                               <!--ng-change="vm.AppointmentClickedToday(slot,1)">-->
+
+                        <!--<label for="Today1 - {{ $index }}">{{slot.startTime}}<br>-->
+                            <!--<span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>-->
+                        <!--</label>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+                <!--<div class="col-md-12 text-center">-->
+
+                    <!--<h2>{{vm.todayStr[2]}}</h2>-->
+
+                    <!--<div class="time-slot1" ng-repeat="slot in timeToday[2]">-->
+
+                        <!--<input type="checkbox" id="Today2 - {{ $index }}" ng-model="vm.book"-->
+                               <!--ng-disabled="slot.disabled==true || (slot.remaining==0 && appointmentType!='Walkin')"-->
+                               <!--ng-change="vm.AppointmentClickedToday(slot,2)">-->
+
+                        <!--<label for="Today2 - {{ $index }}">{{slot.startTime}}<br>-->
+                            <!--<span ng-if="slot.disabled == true">{{slot.disabledReason}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining == 0">Booked:{{slot.total}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining > 0">Available:{{slot.remaining}}</span>-->
+                            <!--<span ng-if="slot.disabled != true && slot.remaining < 0">OverBooked:{{slot.total}}/{{slot.total+slot.remaining}}</span>-->
+                        <!--</label>-->
+
+                    <!--</div>-->
+
+                <!--</div>-->
+              <!--</div>-->
+            <!--&lt;!&ndash; / BASIC FORM &ndash;&gt;-->
+
+            <!--&lt;!&ndash; BASIC FORM DATA &ndash;&gt;-->
+
+            <!--&lt;!&ndash; / BASIC FORM DATA &ndash;&gt;-->
+        <!--</div>-->
+    </div>
+</div>
+
+

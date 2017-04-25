@@ -1,0 +1,65 @@
+<div id="login" class="flex-scrollable" layout="column" ms-scroll>
+    <div id="login-form-wrapper" layout="column" layout-align="center center">
+        <div id="login-form" class="md-whiteframe-8dp">
+            <div class="logo md-accent-bg">
+                <span>MX</span>
+            </div>
+
+            <div class="title" translate="LOGIN.TITLE">Log in to your account</div>
+
+            <form name="loginForm" novalidate>
+                <md-input-container class="md-block" md-no-float>
+                    <input type="number" name="phoneNumber" ng-model="vm.form.phoneNumber" placeholder="Phone Number"
+                           translate translate-attr-placeholder="LOGIN.PHONENUMBER"
+                           required>
+                    <div ng-messages="loginForm.phoneNumber.$error" role="alert">
+                        <div ng-message="required">
+                            <span translate="LOGIN.ERRORS.PHONENUMBER_REQUIRED"></span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <md-input-container class="md-block" md-no-float>
+                    <input type="password" name="password" ng-model="vm.form.password" placeholder="Password"
+                           translate translate-attr-placeholder="LOGIN.PASSWORD"
+                           required>
+                    <div ng-messages="loginForm.password.$error" role="alert">
+                        <div ng-message="required">
+                            <span translate="LOGIN.ERRORS.PASSWORD_REQUIRED">Password field is required</span>
+                        </div>
+                    </div>
+                </md-input-container>
+
+                <div class="remember-forgot-password" layout="row" layout-xs="column"
+                     layout-align="space-between center">
+                    <md-checkbox class="remember-me" ng-model="data.cb1" aria-label="Remember Me">
+                        <span translate="LOGIN.REMEMBER_ME">Remember Me</span>
+                    </md-checkbox>
+
+                    <a ui-sref="app.pages_auth_forgot-password" class="forgot-password md-accent-color"
+                       translate="LOGIN.FORGOT_PASSWORD">Forgot Password?</a>
+                </div>
+
+                <md-button type="button" ng-click="vm.Login()" class="md-raised md-accent submit-button" aria-label="LOG IN"
+                           ng-disabled="loginForm.$invalid || loginForm.$pristine"
+                           translate="LOGIN.LOG_IN" translate-attr-aria-label="LOGIN.LOG_IN">
+                    LOG IN
+                </md-button>
+              <!--<md-button type="button" ng-click="vm.CheckLogin()" class="md-raised md-accent submit-button" aria-label="LOG IN"-->
+                <!-->
+                <!--Check LOG IN-->
+              <!--</md-button>-->
+              <md-button type="button" ng-click="vm.Logout()" class="md-raised md-accent submit-button" aria-label="LOG IN"
+                >
+               Logout
+              </md-button>
+              <!--<md-button type="button" ng-click="vm.Me()" class="md-raised md-accent submit-button" aria-label="LOG IN"-->
+                <!-->
+                <!--Me-->
+              <!--</md-button>-->
+
+            </form>
+
+        </div>
+    </div>
+</div>

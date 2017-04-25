@@ -1,0 +1,145 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+  <!-- CONTENT -->
+<div class="content" layout="column">
+<div layout="row">
+  <!-- BASIC FORM -->
+  <div class="form-wrapper md-whiteframe-1dp" flex="100">
+
+    <form name="patientForm" class="md-inline-form" novalidate>
+
+      <div class="form-title"></div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="firstName" ng-model="vm.patientForm.firstName"
+                 placeholder="Firstname"
+                 required>
+          <div ng-messages="patientForm.firstName.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Firstname field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <input type="text" name="middleName" ng-model="vm.patientForm.middleName"
+                 placeholder="MiddleName">
+        </md-input-container>
+
+        <md-input-container flex>
+          <input type="text" name="lastName" ng-model="vm.patientForm.lastName" placeholder="Lastname"
+                 required>
+          <div ng-messages="patientForm.lastName.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Lastname field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="address1" ng-model="vm.patientForm.address1"
+                 placeholder="Address1"
+                 required>
+          <div ng-messages="patientForm.address1.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Address1 field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+        <md-input-container flex>
+          <input type="text" name="address2" ng-model="vm.patientForm.address2"
+                 placeholder="Address2"
+                 required>
+          <div ng-messages="patientForm.address2.$error"
+               role="alert">
+            <div ng-message="required">
+              <span>Address2 field is required.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-xs="row">
+        <md-input-container flex>
+          <label>City</label>
+          <input type="text" name="city" ng-model="vm.patientForm.city">
+        </md-input-container>
+        <div ng-messages="patientForm.city.$error"
+             role="alert">
+          <div ng-message="required">
+            <span>City field is required.</span>
+          </div>
+        </div>
+
+        <md-input-container flex>
+          <label>State</label>
+          <md-select ng-model="vm.patientForm.state">
+            <md-option ng-repeat="state in vm.states" value="{{state}}">
+              {{state}}
+            </md-option>
+          </md-select>
+        </md-input-container>
+
+
+        <md-input-container flex>
+          <label>Postal Code</label>
+          <input name="pincode" ng-model="vm.patientForm.pincode" placeholder="123456"
+                 required ng-pattern="/^[0-9]{6}$/" md-maxlength="6">
+          <div ng-messages="patientForm.pincode.$error" role="alert" multiple>
+            <div ng-message="required"><span>You must supply a postal code.</span></div>
+            <div ng-message="pattern"><span>That doesn't look like a valid postal code.</span></div>
+            <div ng-message="md-maxlength">
+              <span>Pincode can't be longer than 6 characters.</span>
+            </div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="email" ng-model="vm.patientForm.email"
+                 placeholder="Email" ng-pattern="/^.+@.+\..+$/"
+                 required>
+          <div ng-messages="patientForm.email.$error"
+               role="alert" >
+            <div ng-message="required">
+              <span>Email field is required.</span>
+            </div>
+            <div ng-message="pattern"><span>That doesn't look like a valid email.</span></div>
+          </div>
+        </md-input-container>
+      </div>
+
+      <div layout="column" layout-gt-sm="row">
+        <md-input-container flex>
+          <input type="text" name="phoneNumber" ng-model="vm.patientForm.phoneNumber"
+                 placeholder="Phone Number ( Login id. to change please contact support@medixprt.com )">
+        </md-input-container>
+      </div>
+
+      <md-chips ng-model="vm.patientForm.phone1" name="phone1" placeholder="Phone Numbers" >
+       <md-chip-template>
+          <strong>{{$chip}}</strong>
+        </md-chip-template>
+      </md-chips>
+
+      <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                 ng-click = "vm.CreatePatient()"  >
+        Create Patient
+      </md-button>
+    </form>
+
+  </div>
+  <!-- / BASIC FORM -->
+
+  <!-- BASIC FORM DATA -->
+
+  <!-- / BASIC FORM DATA -->
+</div>
+</div>
+  </div>
+

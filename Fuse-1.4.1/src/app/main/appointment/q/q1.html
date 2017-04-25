@@ -1,0 +1,149 @@
+<div id="simple-table" class="page-layout simple fullwidth doc-page element-doc-page">
+
+    <!--Quewue : {{q}}-->
+
+    <!-- CONTENT -->
+    <div class="content">
+
+        <!-- MAIN -->
+        <div class="main" ms-scroll>
+
+            <!-- CONTACT LIST -->
+            <md-list class="contacts-list">
+
+
+
+                <!-- CONTACT ITEM -->
+                <md-list-item class="contact-item md-white-bg" md-ink-ripple
+                              ng-repeat="appointment in q "
+                              ng-style="{'transform': 'translate3d(0px, '+$index * 100+'%, 0px)', 'z-index': filteredContacts.length - $index}"
+                              ng-class="{'selected': vm.isSelected(contact)}">
+
+
+
+                    <!--<img class="md-avatar" ng-if="contact.avatar" alt="{{contact.name}}"-->
+                         <!--ng-src="{{contact.avatar}}"/>-->
+
+                    <p class="text-truncate font-weight-600">{{appointment.patientId}}</p>
+
+
+                    <!--<p class="email text-truncate hide show-gt-sm">-->
+                      <!--{{contact.email}}-->
+                    <!--</p>-->
+
+                    <!--<p class="phone text-truncate hide show-gt-md">-->
+                      <!--{{contact.phone}}-->
+                    <!--</p>-->
+
+                    <!--<p class="job-title text-truncate hide show-gt-lg">-->
+                      <!--{{contact.jobTitle}}-->
+                    <!--</p>-->
+
+                    <!--<p class="company text-truncate hide show-gt-lg">-->
+                      <!--{{contact.company}}-->
+                    <!--</p>-->
+
+                      <!--<div class="actions" layout="row" layout-align="start center">-->
+                          <!--<md-button class="md-icon-button  hide show-gt-xs"-->
+                                     <!--ng-click="$event.stopPropagation();vm.toggleInArray(contact.id, vm.user.starred)"-->
+                                     <!--aria-label="Toggle starred" translate-->
+                                     <!--translate-attr-aria-label="CONTACTS.TOGGLE_STARRED">-->
+                              <!--<md-icon ng-if="vm.exists(contact.id,vm.user.starred)" md-font-icon="icon-star"-->
+                                       <!--class="amber-fg"></md-icon>-->
+                              <!--<md-icon ng-if="!vm.exists(contact.id,vm.user.starred)"-->
+                                       <!--md-font-icon="icon-star-outline"></md-icon>-->
+                          <!--</md-button>-->
+
+                          <!--<md-menu>-->
+                              <!--<md-button class="md-icon-button" aria-label="More" translate-->
+                                         <!--translate-attr-aria-label="CONTACTS.MORE">-->
+                                  <!--<md-icon md-font-icon="icon-dots-vertical" ng-click="$mdOpenMenu($event)"></md-icon>-->
+                              <!--</md-button>-->
+
+                              <!--<md-menu-content width="3">-->
+                                  <!--<md-menu-item>-->
+                                      <!--<md-button ng-click="vm.deleteContactConfirm(contact, ev)"-->
+                                                 <!--translate="CONTACTS.DELETE_CONTACT">-->
+                                          <!--Delete Contact-->
+                                      <!--</md-button>-->
+                                  <!--</md-menu-item>-->
+
+                                  <!--<md-divider ng-if="vm.user.groups"></md-divider>-->
+
+                                  <!--<md-subheader class="md-no-sticky" ng-if="vm.user.groups">Groups</md-subheader>-->
+
+                                  <!--<md-list-item ng-if="vm.user.groups" ng-repeat="group in vm.user.groups"-->
+                                                <!--ng-click="vm.toggleInArray(contact.id,group.contactIds)">-->
+                                      <!--<p class="pl-8"-->
+                                         <!--ng-style="vm.exists(contact.id,group.contactIds) && {'font-weight':'500'}">-->
+                                        <!--{{group.name}}-->
+                                      <!--</p>-->
+                                  <!--</md-list-item>-->
+
+                              <!--</md-menu-content>-->
+                          <!--</md-menu>-->
+
+                      <!--</div>-->
+
+                </md-list-item>
+                <!-- CONTACT ITEM -->
+
+            </md-list>
+            <!-- / CONTACT LIST -->
+
+            <!-- NO RESULTS -->
+            <md-list-item class="no-results md-white-bg" ng-show="filteredContacts.length === 0">
+                <p translate="CONTACTS.NO_RESULTS">No results..</p>
+            </md-list-item>
+            <!-- / NO RESULTS -->
+
+        </div>
+        <!-- / MAIN -->
+
+
+        <div class="white-bg md-whiteframe-4dp">
+            <table class="dataTable row-border hover" datatable="ng" dt-options="vm.dtOptions">
+                <thead>
+                <tr>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Appointment Type</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Person Type</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Patient ID</span>
+                        </div>
+                    </th>
+                    <th class="secondary-text">
+                        <div class="table-header">
+                            <span class="column-title">Time</span>
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="appointment in q">
+
+                    <td >{{appointment.appointmentType}}</td>
+                    <td >{{appointment.patientId}}</td>
+                    <td >{{appointment.personType}}</td>
+                    <td >{{appointment.startTime}}</td>
+
+
+
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+    <!-- / CONTENT -->
+
+</div>
+

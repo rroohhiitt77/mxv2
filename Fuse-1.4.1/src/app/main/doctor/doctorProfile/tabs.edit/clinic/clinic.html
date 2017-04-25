@@ -1,0 +1,64 @@
+<div id="forms" class="page-layout simple fullwidth doc-page" layout="column">
+<!-- CONTENT -->
+  <div class="content" layout="column">
+    <form name="profileForm" class="md-inline-form" novalidate>
+      <div layout="row">
+      <!-- BASIC FORM -->
+        <div class="form-wrapper md-whiteframe-1dp" flex="100" >
+            <!--<div class="form-title">Education</div>-->
+
+              <div  ng-repeat="clinic in vm.associatedClinics">
+                  <ng-form name="userFieldForm" flex="100" layout="column" layout-gt-sm="row">
+                <md-autocomplete flex="70" required
+                                      md-input-name="clinicAutocompleteField"
+                                      md-input-minlength="0"
+                                      md-input-maxlength="150"
+                                      md-no-cache="true"
+                                      md-selected-item="clinic.selectedItem"
+                                      md-search-text="clinic.searchText"
+                                      md-items="item in vm.querySearch(clinic.searchText)"
+                                      md-item-text="item.display"
+                                      md-floating-label="Clinic"
+                                      >
+                <md-item-template>
+                    <span md-highlight-text="clinic.searchText">{{item.display}}</span>
+                </md-item-template>
+                <md-not-found>
+                    <i>Not Found {{clinic.searchText}}</i>
+                </md-not-found>
+
+                    <div ng-messages="userFieldForm.clinicAutocompleteField.$error" ng-if="userFieldForm.clinicAutocompleteField.$touched">
+                    <div ng-message="required">You <b>must</b> select a clinic.</div>
+                    <div ng-message="minlength">Your entry is not long enough.</div>
+                    <div ng-message="maxlength">Your entry is too long.</div>
+                </div>
+            </md-autocomplete>
+                      <md-input-container flex="30">
+                          <input type="number" name="Fees" ng-model="clinic.fees"
+                                 placeholder="Fees">
+                      </md-input-container>
+                <md-button class="md-fab md-mini md-warn" aria-label="Eat cake">
+                    <md-icon md-font-icon="icon-delete" ng-click="vm.RemoveAssociatedClinics($index)" aria-label="Delete event"></md-icon>
+                </md-button>
+                  </ng-form>
+              </div>
+            <md-button class="md-fab" ng-click="vm.AddAssociatedClinics($event)"
+                       aria-label="Add event">
+                <md-icon md-font-icon="icon-plus"></md-icon>
+            </md-button>
+
+        </div>
+      </div>
+      <div class="mv-24"></div>
+      <div layout="row">
+      <!-- BASIC FORM -->
+      <div class="form-wrapper md-whiteframe-1dp" flex="100">
+      <md-button type="button" class="md-raised md-accent" aria-label="Submit" ng-click = "vm.SubmitProfileForm()">
+        Submit
+      </md-button>
+      </div>
+      </div>
+    </form>
+  </div>
+</div>
+

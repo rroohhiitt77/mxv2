@@ -1,0 +1,235 @@
+<div id="forms" class="page-layout simple fullwidth" layout="column">
+  <!-- CONTENT -->
+  <div class="content" layout="column">
+    <div layout="row">
+      <!-- BASIC FORM -->
+      <div class="form-wrapper md-whiteframe-1dp" flex="100">
+          {{vm.selectedItem}}
+        <form name="scheduleForm1" class="md-inline-form" novalidate>
+          <div class="form-title">Create Schedule</div>
+
+          <div layout="column" layout-gt-sm="row">
+            <md-autocomplete flex required
+                             md-input-name="clinicAutocompleteField"
+                             md-input-minlength="0"
+                             md-input-maxlength="150"
+                             md-no-cache="true"
+                             md-selected-item="vm.selectedItem"
+                             md-search-text="vm.searchText"
+                             md-items="item in vm.querySearch(vm.searchText)"
+                             md-item-text="item.display"
+                             md-floating-label="Clinic">
+              <md-item-template>
+                <span md-highlight-text="vm.searchText">{{item.display}}</span>
+              </md-item-template>
+              <md-not-found>
+                <i>Not Found {{vm.searchText}}</i>
+              </md-not-found>
+              <div ng-messages="scheduleForm1.clinicAutocompleteField.$error" ng-if="scheduleForm1.clinicAutocompleteField.$touched">
+                <div ng-message="required">You <b>must</b> select a clinic.</div>
+                <div ng-message="minlength">Your entry is not long enough.</div>
+                <div ng-message="maxlength">Your entry is too long.</div>
+              </div>
+            </md-autocomplete>
+          </div>
+          <div layout="column" layout-gt-sm="row" flex="50" style="padding-bottom: 20px;">
+            <md-input-container flex>
+              <label>Schedule For</label>
+              <md-select ng-model="vm.scheduleForm.type" >
+                <md-option value="Patient">
+                  Patients
+                </md-option>
+                <md-option value="MR">
+                  MR
+                </md-option>
+                <md-option value="Holiday">
+                  Holiday
+                </md-option>
+              </md-select>
+            </md-input-container>
+          </div>
+          <div layout="column" layout-gt-sm="row">
+            <md-input-container flex>
+              <label>Schedule Start</label>
+              <input mdc-datetime-picker name="startDate"
+                     date="true"
+                     time="false"
+                     type="text"
+                     id="startDate"
+                     short-time="true"
+                     placeholder="Schedule Start Date"
+                     min-date="vm.minDate"
+                     format="DD-MMM-YYYY"
+                     ng-model="vm.scheduleForm.dt"
+                     required>
+              <div ng-messages="scheduleForm1.from.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Schedule start is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Schedule End</label>
+              <input mdc-datetime-picker name="endDate"
+                     date="true"
+                     time="false"
+                     type="text"
+                     id="endDate"
+                     short-time="true"
+                     placeholder="Schedule End Date"
+                     min-date="vm.minDate"
+                     format="DD-MMM-YYYY"
+                     ng-model="vm.scheduleForm.dt1"
+                     required>
+              <div ng-messages="scheduleForm1.to.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Schedule end is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="column" layout-gt-sm="row" layout-wrap flex style="padding-bottom: 30px"
+               ng-if="vm.scheduleForm.type != 'Holiday'">
+              <md-checkbox ng-model="vm.scheduleForm.monday" aria-label="Monday" flex>
+                Mon
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.tuesday" aria-label="Tuesday" flex>
+                Tue
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.wednesday" aria-label="Wednesday" flex>
+                Wed
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.thursday" aria-label="Thursday" flex>
+                Thu
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.friday" aria-label="Friday" flex>
+                Fri
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.saturday" aria-label="Saturday" flex>
+                Sat
+              </md-checkbox>
+              <md-checkbox ng-model="vm.scheduleForm.sunday" aria-label="Sunday" flex>
+                Sun
+              </md-checkbox>
+          </div>
+          <div layout="column" layout-gt-sm="row" layout-wrap>
+            <md-input-container flex ng-if="vm.scheduleForm.type==='Holiday'">
+            <md-checkbox ng-model="vm.fullDay" aria-label="Full Day" flex style="
+                         margin-top: 4px;">
+                         Full Day
+            </md-checkbox>
+
+            </md-input-container>
+            <md-input-container flex ng-if="vm.scheduleForm.type==='Holiday'">
+              <label>OR</label>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Time From</label>
+              <input mdc-datetime-picker name="timeFrom"
+                     date="false"
+                     time="true"
+                     type="text"
+                     id="timeFrom"
+                     short-time="true"
+                     placeholder="Start Time"
+                     format="hh:mm a"
+                     ng-model="vm.timeFrom"
+                     ng-required="vm.scheduleForm.type !='Holiday'"
+                     ng-disabled="vm.scheduleForm.type ==='Holiday' && vm.fullDay">
+              <div ng-messages="scheduleForm1.timeFrom.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Time from is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container flex>
+              <label>Time To</label>
+              <input mdc-datetime-picker name="timeTo"
+                     date="false"
+                     time="true"
+                     type="text"
+                     id="timeTo"
+                     short-time="true"
+                     placeholder="End Time"
+                     format="hh:mm a"
+                     ng-model="vm.timeTo"
+                     ng-required="vm.scheduleForm.type !='Holiday'"
+                     ng-disabled="vm.scheduleForm.type ==='Holiday' && vm.fullDay">
+              <div ng-messages="scheduleForm1.timeTo.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Time to is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+          <div layout="column" layout-gt-sm="row" ng-if="vm.scheduleForm.type != 'Holiday'">
+            <md-input-container flex>
+              <label>Slot Duration</label>
+              <md-select ng-model="vm.scheduleForm.slotDuration">
+                <md-option value="15">
+                  15 minutes
+                </md-option>
+                <md-option value="30">
+                  30 minutes
+                </md-option>
+                <md-option value="45">
+                  45 minutes
+                </md-option>
+                <md-option value="60">
+                  1 hour
+                </md-option>
+                <md-option value="120">
+                  2 hours
+                </md-option>
+                <md-option value="180">
+                  3 hours
+                </md-option>
+              </md-select>
+            </md-input-container>
+            <md-input-container flex>
+              <input type="text" name="maxPerSlot" ng-model="vm.scheduleForm.maxPerSlot"
+                     placeholder="Max Appointments Per Slot"
+                     required>
+              <div ng-messages="scheduleForm1.maxPerSlot.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Max Appointments Per Slot is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+            <md-input-container flex>
+              <input type="text" name="maxWalkInPerSlot" ng-model="vm.scheduleForm.maxWalkInPerSlot"
+                     placeholder="Max Walkin Per Slot"
+                     required>
+              <div ng-messages="scheduleForm1.maxWalkInPerSlot.$error"
+                   role="alert">
+                <div ng-message="required">
+                  <span>Max Walkin Per Slot is required.</span>
+                </div>
+              </div>
+            </md-input-container>
+          </div>
+
+
+          <md-button type="button" class="md-raised md-accent" aria-label="Submit"
+                     ng-disabled="scheduleForm1.$invalid || scheduleForm1.$pristine" ng-click = "vm.SubmitScheduleForm()"  >
+            Submit
+          </md-button>
+        </form>
+
+      </div>
+      <!-- / BASIC FORM -->
+
+      <!-- BASIC FORM DATA -->
+
+      <!-- / BASIC FORM DATA -->
+    </div>
+  </div>
+</div>
+
+
+

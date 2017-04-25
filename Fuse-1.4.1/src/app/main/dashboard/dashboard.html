@@ -1,0 +1,19 @@
+<div id="clinicEdit" class="page-layout simple tabbed">
+    <!-- CONTENT -->
+   <div class="content" flex>
+    <md-tabs md-selected="currentTab" md-dynamic-height>
+        <md-tab label="Book Walkin" ui-sref="app.dashboard.bookWalkin">
+            <div ui-view="bookWalkin"></div>
+        </md-tab>
+        <md-tab label="Book Appointment" ui-sref="app.dashboard.bookAppointment">
+            <div ui-view="bookAppointment"></div>
+        </md-tab>
+        <md-tab label="Prescription" ui-sref="app.dashboard.prescription">
+            <div ui-view="prescription"></div>
+        </md-tab>
+        <md-tab label="Manage Appointment" ui-sref="app.dashboard.manageAppointment">
+            <div ui-view="manageAppointment"></div>
+        </md-tab>
+    </md-tabs>
+  </div>
+</div>
